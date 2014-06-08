@@ -19,6 +19,10 @@
 		9029DDCC1943E88B0009F930 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9029DDB41943E88B0009F930 /* UIKit.framework */; };
 		9029DDD41943E88B0009F930 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9029DDD21943E88B0009F930 /* InfoPlist.strings */; };
 		9029DDD61943E88B0009F930 /* RottenMoviesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9029DDD51943E88B0009F930 /* RottenMoviesTests.m */; };
+		9029DDEA1943ED250009F930 /* MoviesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9029DDE81943ED250009F930 /* MoviesViewController.m */; };
+		9029DDEB1943ED250009F930 /* MoviesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9029DDE91943ED250009F930 /* MoviesViewController.xib */; };
+		9029DDF219448AD90009F930 /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9029DDF019448AD90009F930 /* MovieCell.m */; };
+		9029DDF319448AD90009F930 /* MovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9029DDF119448AD90009F930 /* MovieCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,12 @@
 		9029DDD11943E88B0009F930 /* RottenMoviesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RottenMoviesTests-Info.plist"; sourceTree = "<group>"; };
 		9029DDD31943E88B0009F930 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9029DDD51943E88B0009F930 /* RottenMoviesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RottenMoviesTests.m; sourceTree = "<group>"; };
+		9029DDE71943ED250009F930 /* MoviesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviesViewController.h; sourceTree = "<group>"; };
+		9029DDE81943ED250009F930 /* MoviesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviesViewController.m; sourceTree = "<group>"; };
+		9029DDE91943ED250009F930 /* MoviesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoviesViewController.xib; sourceTree = "<group>"; };
+		9029DDEF19448AD90009F930 /* MovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCell.h; sourceTree = "<group>"; };
+		9029DDF019448AD90009F930 /* MovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCell.m; sourceTree = "<group>"; };
+		9029DDF119448AD90009F930 /* MovieCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +121,12 @@
 				9029DDC01943E88B0009F930 /* AppDelegate.m */,
 				9029DDC21943E88B0009F930 /* Images.xcassets */,
 				9029DDB71943E88B0009F930 /* Supporting Files */,
+				9029DDE71943ED250009F930 /* MoviesViewController.h */,
+				9029DDE81943ED250009F930 /* MoviesViewController.m */,
+				9029DDE91943ED250009F930 /* MoviesViewController.xib */,
+				9029DDEF19448AD90009F930 /* MovieCell.h */,
+				9029DDF019448AD90009F930 /* MovieCell.m */,
+				9029DDF119448AD90009F930 /* MovieCell.xib */,
 			);
 			path = RottenMovies;
 			sourceTree = "<group>";
@@ -220,6 +236,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9029DDBB1943E88B0009F930 /* InfoPlist.strings in Resources */,
+				9029DDEB1943ED250009F930 /* MoviesViewController.xib in Resources */,
+				9029DDF319448AD90009F930 /* MovieCell.xib in Resources */,
 				9029DDC31943E88B0009F930 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,7 +257,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9029DDEA1943ED250009F930 /* MoviesViewController.m in Sources */,
 				9029DDC11943E88B0009F930 /* AppDelegate.m in Sources */,
+				9029DDF219448AD90009F930 /* MovieCell.m in Sources */,
 				9029DDBD1943E88B0009F930 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
