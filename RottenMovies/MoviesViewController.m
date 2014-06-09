@@ -8,11 +8,18 @@
 
 #import "MoviesViewController.h"
 #import "MovieCell.h"
+#import "MovieDetailsViewController.h"
+#import "Movie.h"
+#import <MBProgressHUD.h>
+#import "UIImageView+AFNetworking.h"
 
 @interface MoviesViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property(nonatomic, strong) NSArray *movies;
+@property(nonatomic) long *lastSelectedMovieId;
+
+@property (strong, nonatomic) MBProgressHUD *HUD;
 
 @end
 
@@ -34,21 +41,39 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+    self.HUD.dimBackground = YES;
+    // Regiser for HUD callbacks so we can remove it from the window at the right time
+    self.HUD.delegate = self;
+    self.HUD.labelText = @"Loading..";
+    [self.HUD show:TRUE];
+    
     NSString *url = @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=g9au4hv6khv6wzvzgt55gpqs";
     //NSString *url = @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=g9au4hv6khv6wzvzgt55gpqs";
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        NSLog(@"%@", object);
+        //NSLog(@"%@", object);
         
         self.movies = object[@"movies"];
         [self.tableView reloadData];
+        [self.HUD hide:TRUE];
         
     }];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"MovieCell" bundle:nil] forCellReuseIdentifier:@"MovieCell"];
-    self.tableView.rowHeight=150;
+    self.tableView.rowHeight=90;
+    
+    
+  /*
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    
+    [refresh addTarget:self action:@selector(pullme)
+      forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresh; */
     
 }
 
@@ -66,7 +91,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSLog(@"cell for row at index path %d" , indexPath.row );
+    //NSLog(@"cell for row at index path %d" , indexPath.row );
     
     //UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:nil];
     
@@ -78,6 +103,86 @@
     cell.movieTitleLabel.text = movie[@"title"];
     cell.movieSynopsisLabel.text = movie[@"synopsis"];
     
+    NSURL *url = [NSURL URLWithString:[movie[@"posters"] objectForKey:@"thumbnail" ]];
+    
+    //cell.movilePosterImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[movie[@"posters"] objectForKey:@"thumbnail" ]]]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
+    
+    [request setHTTPShouldHandleCookies:NO];
+    [request setHTTPShouldUsePipelining:YES];
+    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+    
+    __weak MovieCell *weakCell = cell;
+    
+    [cell.movilePosterImageView setImageWithURLRequest: request
+                                placeholderImage:nil
+                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                             
+                                             weakCell.movilePosterImageView.image = image;
+                                             
+                                         }
+     
+                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                             NSLog(@"image fetch failed!");
+                                             [self.HUD hide:TRUE];
+                                             
+                                         }
+     ];
+    
+    //NSLog(@"thumbnail url is %@" ,[movie[@"posters"] objectForKey:@"thumbnail" ] );
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Displays a message box..
+    /*UIAlertView *messageAlert = [[UIAlertView alloc]
+                                 initWithTitle:@"Row Selected" message:@"You've selected a row" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    // Display Alert Message
+    [messageAlert show];*/
+    
+    //Displays a check mark when user selects row
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    
+    // removes the selected row's background selection
+    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // change background color of selected cell
+    UIView *bgColorView = [[UIView alloc] init];
+    [bgColorView setBackgroundColor:[UIColor blueColor]];
+    [cell setSelectedBackgroundView:bgColorView];
+    
+
+    MovieDetailsViewController *detailViewController = [[MovieDetailsViewController alloc] initWithNibName:@"MovieDetailsViewController" bundle:nil];
+
+
+
+    detailViewController.title = @"Details View";
+    
+    if (detailViewController.view) {
+        NSDictionary *movie = self.movies[indexPath.row];
+        
+        detailViewController.movieTitle.text = [movie objectForKey:@"title"];
+        detailViewController.movieSynopsis.text = [movie objectForKey:@"synopsis"];
+        
+        detailViewController.moviePoster.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: [movie objectForKey:@"posters" ][@"detailed"]]]];
+    
+    }
+    
+    // Pass the selected object to the new view controller.
+    [self.navigationController pushViewController:detailViewController animated:YES];
+    
+    
+}
+
+
+- (void)pullme
+{
+    NSLog(@"this is a pull request....");
+}
+
+
 @end

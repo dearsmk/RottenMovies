@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MBProgressHUD.h>
 
-@interface MoviesViewController : UIViewController <UITableViewDataSource>
+@interface MoviesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MBProgressHUDDelegate>
 
 @end
