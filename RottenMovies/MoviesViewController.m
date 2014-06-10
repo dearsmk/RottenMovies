@@ -13,6 +13,10 @@
 #import <MBProgressHUD.h>
 #import "UIImageView+AFNetworking.h"
 
+#import <QuartzCore/QuartzCore.h>
+#import "ODRefreshControl/ODRefreshControl.h"
+
+
 @interface MoviesViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -20,6 +24,7 @@
 @property(nonatomic) long *lastSelectedMovieId;
 
 @property (strong, nonatomic) MBProgressHUD *HUD;
+@property (weak, nonatomic) IBOutlet UILabel *networkErrorLable;
 
 @end
 
@@ -49,31 +54,57 @@
     self.HUD.labelText = @"Loading..";
     [self.HUD show:TRUE];
     
+    ODRefreshControl *refreshControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
+    refreshControl.tintColor = [UIColor grayColor];
+    
+    [refreshControl addTarget:self action:@selector(refreshTableViewHandler:) forControlEvents:UIControlEventValueChanged];
+    [self loadDataFromAPI];
+    
+ 
+    
+}
+
+- (void) refreshTableViewHandler:(ODRefreshControl*) refreshControl {
+    NSLog(@"refresh Handler is being called....");
+    [self loadDataFromAPI];
+    [refreshControl endRefreshing];
+}
+
+-(void) loadDataFromAPI {
+    NSLog(@"Load data method is trying to refresh the data....");
     NSString *url = @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=g9au4hv6khv6wzvzgt55gpqs";
     //NSString *url = @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=g9au4hv6khv6wzvzgt55gpqs";
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        //NSLog(@"%@", object);
-        
-        self.movies = object[@"movies"];
-        [self.tableView reloadData];
-        [self.HUD hide:TRUE];
-        
-    }];
-    
-    [self.tableView registerNib:[UINib nibWithNibName:@"MovieCell" bundle:nil] forCellReuseIdentifier:@"MovieCell"];
-    self.tableView.rowHeight=90;
-    
-    
-  /*
-    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
-    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
-    
-    [refresh addTarget:self action:@selector(pullme)
-      forControlEvents:UIControlEventValueChanged];
-    self.refreshControl = refresh; */
+  
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            
+            
+            if(data){
+                self.networkErrorLable.hidden=YES;
+                id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                self.tableView.rowHeight=90;
+          
+                self.networkErrorLable.hidden=YES;
+                NSLog(@"No Connection error occured...%ld", (long)[httpResponse statusCode] );
+                self.movies = object[@"movies"];
+                [self.tableView reloadData];
+                [self.HUD hide:TRUE];
+                
+                [self.tableView registerNib:[UINib nibWithNibName:@"MovieCell" bundle:nil] forCellReuseIdentifier:@"MovieCell"];
+            }else{
+                if( connectionError ){
+                    
+                    NSLog(@"Connection error occured...");
+                    [self.HUD hide:TRUE];
+                    self.networkErrorLable.text= @"Network Error";
+                    self.networkErrorLable.hidden=NO;
+                    self.tableView.hidden=YES;
+                }
+            }
+            
+        }];
     
 }
 
