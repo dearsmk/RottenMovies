@@ -72,7 +72,7 @@
 
 -(void) loadDataFromAPI {
     NSLog(@"Load data method is trying to refresh the data....");
-    NSString *url = @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=g9au4hv6khv6wzvzgt55gpqs";
+    NSString *url = @"http://11api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=g9au4hv6khv6wzvzgt55gpqs";
     //NSString *url = @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=g9au4hv6khv6wzvzgt55gpqs";
   
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
