@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9006E58219468099006C5495 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9006E58119468099006C5495 /* ODRefreshControl.m */; };
 		9029DDB11943E88B0009F930 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9029DDB01943E88B0009F930 /* Foundation.framework */; };
 		9029DDB31943E88B0009F930 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9029DDB21943E88B0009F930 /* CoreGraphics.framework */; };
 		9029DDB51943E88B0009F930 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9029DDB41943E88B0009F930 /* UIKit.framework */; };
@@ -43,8 +42,6 @@
 /* Begin PBXFileReference section */
 		1375F3440EE54E7992DE7F86 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E9699B4913B4B5B8632B5AA /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		9006E58019468099006C5495 /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
-		9006E58119468099006C5495 /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
 		9029DDAD1943E88B0009F930 /* RottenMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RottenMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9029DDB01943E88B0009F930 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9029DDB21943E88B0009F930 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -99,15 +96,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9006E57F19468099006C5495 /* ODRefreshControl */ = {
-			isa = PBXGroup;
-			children = (
-				9006E58019468099006C5495 /* ODRefreshControl.h */,
-				9006E58119468099006C5495 /* ODRefreshControl.m */,
-			);
-			path = ODRefreshControl;
-			sourceTree = "<group>";
-		};
 		9029DDA41943E88B0009F930 = {
 			isa = PBXGroup;
 			children = (
@@ -165,7 +153,6 @@
 		9029DDB71943E88B0009F930 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				9006E57F19468099006C5495 /* ODRefreshControl */,
 				9029DDB81943E88B0009F930 /* RottenMovies-Info.plist */,
 				9029DDB91943E88B0009F930 /* InfoPlist.strings */,
 				9029DDBC1943E88B0009F930 /* main.m */,
@@ -328,7 +315,6 @@
 				9029DDFB1944E3330009F930 /* movie.m in Sources */,
 				9029DDF71944A2DA0009F930 /* MovieDetailsViewController.m in Sources */,
 				9029DDEA1943ED250009F930 /* MoviesViewController.m in Sources */,
-				9006E58219468099006C5495 /* ODRefreshControl.m in Sources */,
 				9029DDC11943E88B0009F930 /* AppDelegate.m in Sources */,
 				9029DDF219448AD90009F930 /* MovieCell.m in Sources */,
 				9029DDBD1943E88B0009F930 /* main.m in Sources */,
