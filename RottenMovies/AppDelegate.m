@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "MoviesViewController.h"
 
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -38,27 +40,32 @@
                                                      title: @"Box Office"];
     UINavigationController *boxOfficeNavController = [[UINavigationController alloc] initWithRootViewController:boxOfficeViewController];
     boxOfficeNavController.tabBarItem.image = [UIImage imageNamed:@"ticket.png"];
-    boxOfficeNavController.title = @"Box Office Movies";
+    boxOfficeNavController.title = @"Box Office";
     
     MoviesViewController *topDVDsViewController = [[MoviesViewController alloc] initWithRTURL:@"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=g9au4hv6khv6wzvzgt55gpqs"
                                                                                         title: @"Top DVDs"];
     UINavigationController *topDVDsNavController = [[UINavigationController alloc] initWithRootViewController:topDVDsViewController];
     topDVDsNavController.tabBarItem.image = [UIImage imageNamed:@"disc.png"];
-    topDVDsNavController.title = @"Top DVD Rentals";
+    topDVDsNavController.title = @"Top DVD";
     
-   [[UINavigationBar appearance] setTintColor:[UIColor redColor] ];
-   NSShadow *shadow = [[NSShadow alloc] init];
+    NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
     shadow.shadowOffset = CGSizeMake(0, 1);
-
-     [[UINavigationBar appearance] setTintColor:[UIColor cyanColor]];
+    /*[[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
+                                                           shadow, NSShadowAttributeName,
+                                                           [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], NSFontAttributeName, nil]]; */
+    
+    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x067AB5)];
+    [[UINavigationBar appearance] setBarTintColor: [UIColor redColor]];
+    //[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"back_btn.png"]];
     
     UITabBarController *tbc = [[UITabBarController alloc] init];
     [tbc setViewControllers:[NSArray arrayWithObjects:boxOfficeNavController, topDVDsNavController, nil]];
-    [tbc.view setBackgroundColor:[UIColor lightGrayColor]];
+    [tbc.view setBackgroundColor:[UIColor blackColor]];
     self.window.rootViewController = tbc;
     
-    self.window.backgroundColor = [UIColor whiteColor];
+    //self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     return YES;
     
