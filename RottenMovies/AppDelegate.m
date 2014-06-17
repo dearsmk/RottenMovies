@@ -13,7 +13,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    /*self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
     MoviesViewController *vc = [[MoviesViewController alloc] init];
@@ -23,7 +23,48 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    return YES;*/
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:2 * 1024 * 1024
+                                                            diskCapacity:100 * 1024 * 1024
+                                                                diskPath:nil];
+    [NSURLCache setSharedURLCache:sharedCache];
+    
+    
+    MoviesViewController *boxOfficeViewController = [[MoviesViewController alloc]
+                                                     initWithRTURL:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=g9au4hv6khv6wzvzgt55gpqs"
+                                                     title: @"Box Office"];
+    UINavigationController *boxOfficeNavController = [[UINavigationController alloc] initWithRootViewController:boxOfficeViewController];
+    boxOfficeNavController.tabBarItem.image = [UIImage imageNamed:@"ticket.png"];
+    boxOfficeNavController.title = @"Box Office Movies";
+    
+    MoviesViewController *topDVDsViewController = [[MoviesViewController alloc] initWithRTURL:@"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=g9au4hv6khv6wzvzgt55gpqs"
+                                                                                        title: @"Top DVDs"];
+    UINavigationController *topDVDsNavController = [[UINavigationController alloc] initWithRootViewController:topDVDsViewController];
+    topDVDsNavController.tabBarItem.image = [UIImage imageNamed:@"disc.png"];
+    topDVDsNavController.title = @"Top DVD Rentals";
+    
+   [[UINavigationBar appearance] setTintColor:[UIColor redColor] ];
+   NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
+    shadow.shadowOffset = CGSizeMake(0, 1);
+
+     [[UINavigationBar appearance] setTintColor:[UIColor cyanColor]];
+    
+    UITabBarController *tbc = [[UITabBarController alloc] init];
+    [tbc setViewControllers:[NSArray arrayWithObjects:boxOfficeNavController, topDVDsNavController, nil]];
+    [tbc.view setBackgroundColor:[UIColor lightGrayColor]];
+    self.window.rootViewController = tbc;
+    
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
     return YES;
+    
+    
+    
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

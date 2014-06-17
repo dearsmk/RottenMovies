@@ -26,6 +26,8 @@
 @property (strong, nonatomic) MBProgressHUD *HUD;
 @property (weak, nonatomic) IBOutlet UILabel *networkErrorLable;
 
+@property (strong, nonatomic) NSString* apiEndPoint;
+
 @end
 
 @implementation MoviesViewController
@@ -36,6 +38,14 @@
     if (self) {
         self.title = @"Movies";
     }
+    return self;
+}
+
+- (id) initWithRTURL:(NSString*) apiEndPointParam title:(NSString*) titleParam {
+    
+    self = [super init];
+    self.apiEndPoint = apiEndPointParam;
+    self.title = titleParam;
     return self;
 }
 
@@ -60,7 +70,6 @@
     [refreshControl addTarget:self action:@selector(refreshTableViewHandler:) forControlEvents:UIControlEventValueChanged];
     [self loadDataFromAPI];
     
- 
     
 }
 
@@ -72,7 +81,7 @@
 
 -(void) loadDataFromAPI {
     NSLog(@"Load data method is trying to refresh the data....");
-    NSString *url = @"http://11api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=g9au4hv6khv6wzvzgt55gpqs";
+    NSString *url = self.apiEndPoint;
     //NSString *url = @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=g9au4hv6khv6wzvzgt55gpqs";
   
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -200,6 +209,14 @@
         detailViewController.movieSynopsis.text = [movie objectForKey:@"synopsis"];
         
         detailViewController.moviePoster.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: [movie objectForKey:@"posters" ][@"detailed"]]]];
+        
+        detailViewController.moviePoster.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: [movie objectForKey:@"posters" ][@"detailed"]]]];
+        detailViewController.moviePoster.alpha = 0;
+        [UIView beginAnimations:@"fade in" context:nil];
+        [UIView setAnimationDuration:2.0];
+        detailViewController.moviePoster.alpha = 1;
+        [UIView commitAnimations];
+        
     
     }
     
@@ -208,12 +225,5 @@
     
     
 }
-
-
-- (void)pullme
-{
-    NSLog(@"this is a pull request....");
-}
-
 
 @end

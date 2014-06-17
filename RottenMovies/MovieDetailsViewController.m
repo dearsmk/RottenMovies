@@ -64,7 +64,7 @@
     
     //self.movieTitle.text = [self.selectedMovie title];
     //self.movieSynopsis.text = [self.selectedMovie synopsis];
-   
+
     
 }
 

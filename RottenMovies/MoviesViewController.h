@@ -11,4 +11,6 @@
 
 @interface MoviesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MBProgressHUDDelegate>
 
+- (id) initWithRTURL:(NSString*) apiEndPointParam title:(NSString*) titleParam;
+
 @end

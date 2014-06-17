@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		900A0C3D194FBB6000F62CE5 /* disc.png in Resources */ = {isa = PBXBuildFile; fileRef = 900A0C3B194FBB6000F62CE5 /* disc.png */; };
+		900A0C3E194FBB6000F62CE5 /* ticket.png in Resources */ = {isa = PBXBuildFile; fileRef = 900A0C3C194FBB6000F62CE5 /* ticket.png */; };
 		9029DDB11943E88B0009F930 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9029DDB01943E88B0009F930 /* Foundation.framework */; };
 		9029DDB31943E88B0009F930 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9029DDB21943E88B0009F930 /* CoreGraphics.framework */; };
 		9029DDB51943E88B0009F930 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9029DDB41943E88B0009F930 /* UIKit.framework */; };
@@ -42,6 +44,8 @@
 /* Begin PBXFileReference section */
 		1375F3440EE54E7992DE7F86 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E9699B4913B4B5B8632B5AA /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		900A0C3B194FBB6000F62CE5 /* disc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disc.png; sourceTree = "<group>"; };
+		900A0C3C194FBB6000F62CE5 /* ticket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket.png; sourceTree = "<group>"; };
 		9029DDAD1943E88B0009F930 /* RottenMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RottenMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9029DDB01943E88B0009F930 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9029DDB21943E88B0009F930 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -96,6 +100,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		900A0C3A194FBB3800F62CE5 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				900A0C3B194FBB6000F62CE5 /* disc.png */,
+				900A0C3C194FBB6000F62CE5 /* ticket.png */,
+			);
+			name = img;
+			sourceTree = "<group>";
+		};
 		9029DDA41943E88B0009F930 = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +144,7 @@
 		9029DDB61943E88B0009F930 /* RottenMovies */ = {
 			isa = PBXGroup;
 			children = (
+				900A0C3A194FBB3800F62CE5 /* img */,
 				9029DDBF1943E88B0009F930 /* AppDelegate.h */,
 				9029DDC01943E88B0009F930 /* AppDelegate.m */,
 				9029DDC21943E88B0009F930 /* Images.xcassets */,
@@ -258,6 +272,8 @@
 			files = (
 				9029DDBB1943E88B0009F930 /* InfoPlist.strings in Resources */,
 				9029DDEB1943ED250009F930 /* MoviesViewController.xib in Resources */,
+				900A0C3E194FBB6000F62CE5 /* ticket.png in Resources */,
+				900A0C3D194FBB6000F62CE5 /* disc.png in Resources */,
 				9029DDF319448AD90009F930 /* MovieCell.xib in Resources */,
 				9029DDC31943E88B0009F930 /* Images.xcassets in Resources */,
 				9029DDF81944A2DA0009F930 /* MovieDetailsViewController.xib in Resources */,
